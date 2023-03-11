@@ -10,7 +10,7 @@ class PersonasController extends Controller
 
     public function index()
     {
-        $datos = Personas::orderBy('paterno','desc')->paginate(2);
+        $datos = Personas::orderBy('paterno', 'desc')->paginate(2);
         return view('welcome', compact('datos'));
 
         //pagina de inicio
@@ -44,8 +44,8 @@ class PersonasController extends Controller
     public function show($id)
     {
         //obtener registro de nuestra tabla
-        $personas= Personas::find($id);
-        return view("eliminar",compact('personas'));
+        $personas = Personas::find($id);
+        return view("eliminar", compact('personas'));
     }
 
 
@@ -60,7 +60,7 @@ class PersonasController extends Controller
     public function update(Request $request, $id)
     {
         //actualiza datos en la db
-        $personas= Personas::find($id);
+        $personas = Personas::find($id);
         $personas->paterno = $request->post('paterno');
         $personas->materno = $request->post('materno');
         $personas->nombre = $request->post('nombre');
@@ -69,7 +69,6 @@ class PersonasController extends Controller
 
 
         return redirect()->route("personas.index")->with("success", "Actualizado con exito!");
-
     }
 
 
@@ -77,9 +76,8 @@ class PersonasController extends Controller
     {
         //elimina un registro
 
-       $personas= Personas::find($id);
-       $personas->delete();
-       return redirect()->route("personas.index")->with("success", "Eliminado con exito!");
-
+        $personas = Personas::find($id);
+        $personas->delete();
+        return redirect()->route("personas.index")->with("success", "Eliminado con exito!");
     }
 }
